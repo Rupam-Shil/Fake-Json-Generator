@@ -13,22 +13,10 @@
 import Navbar from './components/NavBar.vue';
 import Card from './components/Card.vue';
 import { ref } from 'vue';
+import { allCards } from './composables/allJsonData';
 
 //data
-const cards = ref([
-	{ icon: 'fa-home' },
-	{ icon: 'fa-paw' },
-	{ icon: 'fa-building' },
-	{ icon: 'fa-calendar-week' },
-	{ icon: 'fa-money-check-alt' },
-	{ icon: 'fa-cog' },
-	{ icon: 'fa-image' },
-	{ icon: 'fa-wifi' },
-	{ icon: 'fa-align-left' },
-	{ icon: 'fa-user-circle' },
-	{ icon: 'fa-phone-alt' },
-	{ icon: 'fa-dice' },
-]);
+const cards = ref(allCards);
 </script>
 
 <style lang="scss">

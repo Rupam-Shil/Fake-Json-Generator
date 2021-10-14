@@ -5,11 +5,42 @@
 				<i class="fas " :class="card.icon"></i>
 			</div>
 		</div>
+		<div class="card-main">
+			<div class="checkbox">
+				<input type="checkbox" :value="card.value" v-model="checkboxValues" />
+				<span class="checkbox-name">{{ card.name }}</span>
+			</div>
+		</div>
 	</div>
 </template>
 
 <script setup>
-import { ref, defineProps, toRefs } from 'vue';
+import { ref, defineProps, toRefs, watch } from 'vue';
+import { useStore } from 'vuex';
+
+const checkboxValues = ref([]);
+
+const store = useStore();
+
+watch(checkboxValues, (newValue, oldValue) => {
+	if (newValue.length > oldValue.length) {
+		checkboxValues.value.forEach((val) => {
+			if (store.state.allCheckedValues.includes(val)) {
+				return;
+			} else {
+				store.commit('pushToCheckedValues', val);
+			}
+		});
+	} else {
+		oldValue.forEach((val) => {
+			if (newValue.includes(val)) {
+				return;
+			} else {
+				store.commit('removeFromCheckedValues', val);
+			}
+		});
+	}
+});
 
 const props = defineProps({
 	card: {},
@@ -20,12 +51,33 @@ const { card } = toRefs(props);
 
 <style lang="scss" scoped>
 .card {
-	height: 15rem;
+	min-height: 15rem;
 	background: var(--white);
 	box-shadow: var(--box-shadow-card);
 	border-radius: 1rem;
 	position: relative;
 	isolation: isolate;
+	&-main {
+		width: 100%;
+		height: 100%;
+		padding: 3rem 1rem 1rem;
+		border-radius: inherit;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		.checkbox {
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+			&-name {
+				color: var(--icon-grey);
+				text-transform: capitalize;
+				font-weight: 600;
+			}
+			input:checked + .checkbox-name {
+				color: var(--text-black);
+			}
+		}
+	}
 	&-icon {
 		position: absolute;
 		width: 80px;
@@ -51,8 +103,46 @@ const { card } = toRefs(props);
 			i {
 				font-size: 1.5rem;
 				color: var(--icon-grey);
+				transition: 0.3s ease-in-out;
 			}
 		}
+	}
+	&:hover {
+		.card-icon {
+			&::before {
+				position: absolute;
+				content: '';
+				width: 100%;
+				height: 100%;
+				border-radius: 50%;
+				background-color: #4158d0;
+				background-image: linear-gradient(
+					43deg,
+					#4158d0 0%,
+					#c850c0 46%,
+					#ffcc70 100%
+				);
+				animation: backgroundrotate 1s linear infinite;
+			}
+
+			&-main {
+				box-shadow: none;
+			}
+		}
+		i {
+			transform: rotate(-10deg) scale(1.2);
+			color: var(--text-black);
+		}
+	}
+}
+
+@keyframes backgroundrotate {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
 	}
 }
 </style>
