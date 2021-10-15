@@ -1,10 +1,49 @@
 <template>
 	<div>
-		<button>Get Some JSON!</button>
+		<button @click="sendJson">Get Some JSON!</button>
 	</div>
 </template>
 
-<script setup></script>
+<script setup>
+import Swal from 'sweetalert2';
+import { useStore } from 'vuex';
+import { ref, computed } from 'vue';
+import faker from 'faker';
+const store = useStore();
+
+const sendJson = async () => {
+	const { value } = await Swal.fire({
+		title: 'Enter the size of the JSON(Max:100)',
+		input: 'range',
+		inputLabel: 'JSON Size',
+		inputValue: 10,
+		inputAttributes: {
+			min: 1,
+			max: 100,
+			step: 1,
+		},
+		showCancelButton: true,
+	});
+	if (value) {
+		formJson(parseInt(value));
+		store.dispatch('makeJsonTrue');
+	}
+};
+const formJson = (value) => {
+	const jsonArray = computed(() => store.state.allCheckedValues);
+	const tempArray = [];
+	for (let i = 0; i < value; i++) {
+		const tempJson = {};
+		jsonArray.value.forEach((elem) => {
+			let tempElem = elem;
+			tempElem = tempElem.replace('.', '');
+			const func = `faker.${elem}()`;
+			// tempJson['tempElem'] = eval(func);
+			console.log(func);
+		});
+	}
+};
+</script>
 
 <style lang="scss" scoped>
 button {

@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<Resultjson v-if="store.state.showJsonResult" />
 		<div class="container">
 			<Navbar />
 			<div class="card-section">
@@ -14,9 +15,12 @@ import Navbar from './components/NavBar.vue';
 import Card from './components/Card.vue';
 import { ref } from 'vue';
 import { allCards } from './composables/allJsonData';
+import Resultjson from './components/Resultjson.vue';
+import { useStore } from 'vuex';
 
 //data
 const cards = ref(allCards);
+const store = useStore();
 </script>
 
 <style lang="scss">
@@ -36,6 +40,8 @@ const cards = ref(allCards);
 	--box-shadow-card: 0px 4px 10px #e5e5e5;
 	--box-shadow-button: 0px 4px 4px rgba(0, 0, 0, 0.25);
 	--white: #fff;
+	--modal-color: #818181;
+	--json-modal-color: #000000;
 }
 body {
 	font-family: 'Poppins', sans-serif;

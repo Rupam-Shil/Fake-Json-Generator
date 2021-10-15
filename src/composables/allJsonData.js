@@ -1,7 +1,7 @@
 export const allCards = [
 	{
 		icon: 'fa-home',
-		value: 'check1',
+		name: 'address',
 		checkboxdata: [
 			{ value: 'address.zipCode', name: 'Zip-Code' },
 			{ value: 'address.city', name: 'City' },
@@ -15,7 +15,7 @@ export const allCards = [
 	},
 	{
 		icon: 'fa-paw',
-		value: 'check2',
+		name: 'animal',
 		checkboxdata: [
 			{ value: 'animal.dog', name: 'Dog' },
 			{ value: 'animal.cat', name: 'Cat' },
@@ -29,7 +29,7 @@ export const allCards = [
 	},
 	{
 		icon: 'fa-building',
-		value: 'check3',
+		name: 'company',
 		checkboxdata: [
 			{ value: 'company.companyName', name: 'Company' },
 			{ value: 'company.catchPhrase', name: 'Tagline' },
@@ -40,7 +40,7 @@ export const allCards = [
 	},
 	{
 		icon: 'fa-calendar-week',
-		value: 'check4',
+		name: 'date',
 		checkboxdata: [
 			{ value: 'date.past', name: 'Past' },
 			{ value: 'date.future', name: 'Future' },
@@ -51,7 +51,7 @@ export const allCards = [
 	},
 	{
 		icon: 'fa-money-check-alt',
-		value: 'check5',
+		name: 'finance',
 		checkboxdata: [
 			{ value: 'finance.currencySymbol', name: 'Currency Symbol' },
 			{ value: 'finance.currencyName', name: 'Currency Name' },
@@ -65,7 +65,7 @@ export const allCards = [
 	},
 	{
 		icon: 'fa-cog',
-		value: 'check6',
+		name: 'helpers',
 		checkboxdata: [
 			{
 				value: 'helpers.replaceCreditCardSymbols',
@@ -82,7 +82,7 @@ export const allCards = [
 	},
 	{
 		icon: 'fa-image',
-		value: 'check7',
+		name: 'image',
 		checkboxdata: [
 			{
 				value: 'image.image',
@@ -111,7 +111,7 @@ export const allCards = [
 	},
 	{
 		icon: 'fa-wifi',
-		value: 'check8',
+		name: 'internet',
 		checkboxdata: [
 			{
 				value: 'internet.email',
@@ -140,7 +140,7 @@ export const allCards = [
 	},
 	{
 		icon: 'fa-align-left',
-		value: 'check9',
+		name: 'lorem',
 		checkboxdata: [
 			{
 				value: 'lorem.word',
@@ -165,7 +165,7 @@ export const allCards = [
 	},
 	{
 		icon: 'fa-user-circle',
-		value: 'check10',
+		name: 'name',
 		checkboxdata: [
 			{
 				value: 'name.findName',
@@ -190,7 +190,7 @@ export const allCards = [
 	},
 	{
 		icon: 'fa-phone-alt',
-		value: 'check11',
+		name: 'phone',
 		checkboxdata: [
 			{
 				value: 'phone.phoneNumber',
@@ -208,7 +208,7 @@ export const allCards = [
 	},
 	{
 		icon: 'fa-dice',
-		value: 'check12',
+		name: 'random',
 		checkboxdata: [
 			{
 				value: 'random.number',
