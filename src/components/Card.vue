@@ -6,9 +6,17 @@
 			</div>
 		</div>
 		<div class="card-main">
-			<div class="checkbox">
-				<input type="checkbox" :value="card.value" v-model="checkboxValues" />
-				<span class="checkbox-name">{{ card.name }}</span>
+			<div
+				class="checkbox"
+				v-for="(checbox, index) in card.checkboxdata"
+				:key="index"
+			>
+				<input
+					type="checkbox"
+					:value="checbox.value"
+					v-model="checkboxValues"
+				/>
+				<span class="checkbox-name">{{ checbox.name }}</span>
 			</div>
 		</div>
 	</div>
@@ -59,7 +67,7 @@ const { card } = toRefs(props);
 	isolation: isolate;
 	&-main {
 		width: 100%;
-		height: 100%;
+		gap: 1rem;
 		padding: 3rem 1rem 1rem;
 		border-radius: inherit;
 		display: grid;
@@ -75,6 +83,7 @@ const { card } = toRefs(props);
 			}
 			input:checked + .checkbox-name {
 				color: var(--text-black);
+				font-weight: 700;
 			}
 		}
 	}
