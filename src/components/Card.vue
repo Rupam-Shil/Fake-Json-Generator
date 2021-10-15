@@ -76,6 +76,7 @@ const { card } = toRefs(props);
 			display: flex;
 			align-items: center;
 			gap: 0.5rem;
+			cursor: pointer;
 			&-name {
 				color: var(--icon-grey);
 				text-transform: capitalize;

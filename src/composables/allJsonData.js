@@ -129,7 +129,7 @@ export const allCards = [
 				name: 'IPV6',
 			},
 			{
-				value: 'internet.domainNam',
+				value: 'internet.domainName',
 				name: 'Domain Name',
 			},
 			{

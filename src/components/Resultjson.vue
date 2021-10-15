@@ -2,9 +2,11 @@
 	<div class="result-modal">
 		<div class="main-modal">
 			<h1>Your Fake JSON</h1>
-			<div class="main-modal-json"></div>
+			<div class="main-modal-json">{{ store.state.finalJson }}</div>
 			<div class="btns">
-				<button class="ctc">Copy To Clipboard</button>
+				<button class="ctc" @click="copyToClipboard" ref="clipboardBtnText">
+					Copy To Clipboard
+				</button>
 				<button class="ctc" @click="closeModal">Cancel</button>
 			</div>
 		</div>
@@ -13,10 +15,25 @@
 
 <script setup>
 import { useStore } from 'vuex';
+import useClipboard from 'vue-clipboard3';
+import { ref } from 'vue';
 
+const { toClipboard } = useClipboard();
 const store = useStore();
+const clipboardBtnText = ref('');
+
+const copyToClipboard = async () => {
+	try {
+		await toClipboard(store.state.finalJson);
+		clipboardBtnText.value.innerText = 'Copied!!';
+	} catch (e) {
+		console.error(e);
+	}
+};
 
 const closeModal = () => {
+	clipboardBtnText.value.innerText = 'Copy To Clipboard';
+
 	store.commit('isJsonResult', false);
 };
 </script>
@@ -44,7 +61,12 @@ const closeModal = () => {
 		flex-direction: column;
 		align-items: center;
 		justify-content: space-between;
+
 		&-json {
+			overflow-y: scroll;
+			&::-webkit-scrollbar {
+				display: none;
+			}
 			width: 90%;
 			height: 70vh;
 			background: var(--json-modal-color);
@@ -76,6 +98,13 @@ const closeModal = () => {
 					box-shadow: none;
 				}
 			}
+		}
+	}
+}
+@media only screen and (max-width: 600px) {
+	.result-modal {
+		.main-modal {
+			width: 100vw;
 		}
 	}
 }

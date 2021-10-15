@@ -3,7 +3,7 @@ import { createStore } from 'vuex';
 export default createStore({
 	state: {
 		allCheckedValues: [],
-		showJsonResult: true,
+		showJsonResult: false,
 		finalJson: {},
 	},
 	mutations: {

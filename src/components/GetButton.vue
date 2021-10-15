@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { useStore } from 'vuex';
 import { ref, computed } from 'vue';
 import faker from 'faker';
+import beautify from 'json-beautify';
 const store = useStore();
 
 const sendJson = async () => {
@@ -37,11 +38,14 @@ const formJson = (value) => {
 		jsonArray.value.forEach((elem) => {
 			let tempElem = elem;
 			tempElem = tempElem.replace('.', '');
-			const func = `faker.${elem}()`;
-			// tempJson['tempElem'] = eval(func);
-			console.log(func);
+			const [tp1, tp2] = elem.split('.');
+			tempJson[tempElem] = faker[tp1][tp2]();
 		});
+
+		tempArray.push(tempJson);
 	}
+	const arrToJson = { ...tempArray };
+	store.commit('updatefinalJson', beautify(arrToJson, null, 2, 80));
 };
 </script>
 
