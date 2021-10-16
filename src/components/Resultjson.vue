@@ -7,6 +7,7 @@
 				<button class="ctc" @click="copyToClipboard" ref="clipboardBtnText">
 					Copy To Clipboard
 				</button>
+				<button class="ctc" @click="downloadFile">Download</button>
 				<button class="ctc" @click="closeModal">Cancel</button>
 			</div>
 		</div>
@@ -29,6 +30,16 @@ const copyToClipboard = async () => {
 	} catch (e) {
 		console.error(e);
 	}
+};
+
+const downloadFile = () => {
+	const content = store.state.finalJson;
+	const newBlob = new Blob([content], { type: 'application/json' });
+	const link = document.createElement('a');
+	link.href = URL.createObjectURL(newBlob);
+	link.download = 'example';
+	link.click();
+	URL.revokeObjectURL(link.href);
 };
 
 const closeModal = () => {
