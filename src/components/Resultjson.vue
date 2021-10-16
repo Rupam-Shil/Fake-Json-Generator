@@ -116,6 +116,11 @@ const closeModal = () => {
 	.result-modal {
 		.main-modal {
 			width: 100vw;
+			.btns {
+				flex-direction: column;
+				margin-top: 1rem;
+				gap: 1rem;
+			}
 		}
 	}
 }
